@@ -1,0 +1,24 @@
+/* Card Style */
+.card{
+    background-color: rgb(250, 250, 250)
+}
+
+.card:hover
+{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+/* drop down menu style */
+#payment-methods
+{
+    border: 2px solid rgb(43, 43, 43) !important;
+    cursor: pointer;
+}
+
+/* Buy Now style */
+#buy-now-img
+{
+    width: 450px;
+    height: 300px;
+}
