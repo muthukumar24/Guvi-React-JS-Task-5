@@ -12,7 +12,13 @@ Application Workflow:
 
 - User Clicks "Buy Now": When the user clicks the "Buy Now" button for a product, they are redirected to the Buy Now page, which serves as the Checkout page.
 
-3 - Checkout Page
+3 - Add to Cart and Cart
+
+- When the "Add to Cart" button is clicked for a specific product, that product is added to the user's cart. The cart count displayed in the navigation bar increments accordingly.
+- The cart button on the LandingPage displays the count of items in the cart. Initially, the cart count is 0.
+- When a user clicks the "Cart" button in Navigation bar, The user is navigated to the BuyNowPage.
+
+4 - Checkout Page
 
 - Product Details: The Checkout page displays the details of the selected product, including its name, image, price, and quantity.
 - Quantity Selection: The user can increase or decrease the quantity of the product. This can be done using a input plus and minus buttons.
@@ -21,9 +27,15 @@ Application Workflow:
 Total Amount = Price × Quantity
 - Display Total Amount: The calculated total amount is displayed on the page so the user can review the cost before proceeding.
 
+5 - Remove from Cart Button :
+
+- When a user clicks the "Remove from Cart" button for a product, The product is removed from the cart.
+- The list of products and the total amount are updated.
+
+
 =======
 
-- NOTE: The images and thumbnails from the JSON data were not working, so I raised a query. After following the instructions from mentor, I downloaded and imported the images into the code.
+- NOTE: The images and thumbnails from JSON data were not working, so I raised a query. After following the instructions from mentor, I downloaded and imported the images into the code.
 
 Image Folder:
 
@@ -35,6 +47,7 @@ Please refer the following files for the source code.
 - /src/App.jsx
 - /src/LandingPage.jsx
 - /src/BuyNow.jsx
+- /src/USerContext.jsx
 - /src/App.css
 
 JSON Data:

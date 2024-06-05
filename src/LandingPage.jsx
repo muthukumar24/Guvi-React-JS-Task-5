@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
 
 // Import images
@@ -10,10 +10,34 @@ import OppoImage from '/oppoPhone.jpg';
 import HuwaiImage from '/huwaiPhone.jpg';
 
 function LandingPage() {
-  // Use the UserContext to get the list of products
-  const products = useContext(UserContext);
+  const { products } = useContext(UserContext);
+  const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
-  // To store the images
+// Function to add a product to the cart
+const addToCart = (product) => {
+  // Check if the product already exists in the cart
+  const isProductInCart = cart.some(item => item.id === product.id);
+
+  // If the product is already in the cart, display an alert
+  if (isProductInCart) {
+    alert('This product is already in your cart.');
+  } else {
+    // If the product is not in the cart, add it
+    setCart([...cart, product]);
+  }
+};
+
+  // Calculate the number of items in the cart
+  const cartCount = cart.length;
+
+  // Function to handle clicking on the cart button
+  const handleCartClick = () => {
+    // Navigate to the buy now page and pass the cart data as state
+    navigate('/buy-now', { state: { cart } });
+  };
+
+  // Array containing product images
   const images = [
     { id: 1, title: "iPhone 9", image: iPhone9Image },
     { id: 2, title: 'iPhone X', image: iPhoneXImage },
@@ -52,6 +76,10 @@ function LandingPage() {
                   </ul>
                 </li>
               </ul>
+              {/* Cart button with cart count */}
+              <button className="btn btn-outline-success" onClick={handleCartClick}>
+                Cart - {cartCount}
+              </button>
             </div>
           </div>
         </nav>
@@ -81,8 +109,10 @@ function LandingPage() {
               return (
                 <div className='col-sm-12 col-md-6 col-lg-4 col-xl-4 py-3' key={product.id}>
                   <div className='card mb-3 h-100'>
+                    {/* Display product image */}
                     {image && <img className="card-img-top" src={image} alt={product.title} />}
                     <div className="card-body">
+                      {/* Product details */}
                       <h4>{product.title}</h4>
                       <h5>Brand - {product.brand}</h5>
                       <p>{product.description}</p>
@@ -90,10 +120,15 @@ function LandingPage() {
                       <p>Price - ${product.price}</p>
                       <p>Discount Percentage - {product.discountPercentage}%</p>
                       <p>Available Stocks - {product.stock}</p>
-                      {/* Link to the Buy Now page for the selected product */}
-                      <Link to={`/buy-now/${product.id}`}>
-                        <button className="btn btn-outline-success">Buy Now</button>
-                      </Link>
+                      {/* Buttons to add to cart and buy now */}
+                      <div className='d-flex gap-3'>
+                        {/* Link to the Buy Now page for the selected product */}
+                        <Link to={`/buy-now/${product.id}`}>
+                          <button className="btn btn-outline-success">Buy Now</button>
+                        </Link>
+                        {/* Button to add the product to the cart */}
+                        <button className="btn btn-outline-primary ml-2" onClick={() => addToCart(product)}>Add to Cart</button>
+                      </div>
                     </div>
                   </div>
                 </div>

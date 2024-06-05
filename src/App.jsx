@@ -1,36 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import BuyNowPage from './BuyNowPage';
-import { UserContext } from './UserContext';
-import data from './data.json';
-import './App.css'
+import { UserProvider } from './UserContext';
+import './App.css';
 
 function App() {
-  // State to hold the list of items (products)
-  const [items, setItems] = useState([]);
-
-  // useEffect hook to load products from data.json when the component mounts
-  useEffect(() => {
-    setItems(data.products);
-    // console.log("Products Updated", data.products);
-  }, []);
-
   return (
-    <>
-      <BrowserRouter>
-        {/* Provide the items (products) to the entire application via context */}
-        <UserContext.Provider value={items}>
-          <Routes>
-            {/* Route for the landing page where products are displayed */}
-            <Route path="/" element={<LandingPage />} />
-            {/* Route for the buy now page (checkout page) with product ID as a URL parameter */}
-            <Route path="/buy-now/:productId" element={<BuyNowPage />} />
-          </Routes>
-        </UserContext.Provider>
-      </BrowserRouter>
-    </>
+    // Wrap the application in UserProvider to provide context to all components
+    <UserProvider>
+      {/* Set up the router for navigation between different pages */}
+      <Router>
+        <Routes>
+          {/* Define the route for the landing page */}
+          <Route path="/" element={<LandingPage />} />
+          {/* Define the route for the buy now page without productId */}
+          <Route path="/buy-now" element={<BuyNowPage />} />
+          {/* Define the route for the buy now page with a productId parameter */}
+          <Route path="/buy-now/:productId" element={<BuyNowPage />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
-};
+}
 
 export default App;
+
