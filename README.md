@@ -47,10 +47,7 @@ Please refer the following files for the source code.
 - /src/App.jsx
 - /src/LandingPage.jsx
 - /src/BuyNow.jsx
-- /src/USerContext.jsx
+- /src/UserContext.jsx
 - /src/App.css
-
-JSON Data:
-- /src/data.json
 
 Thankyou and Awaiting Feedback.
